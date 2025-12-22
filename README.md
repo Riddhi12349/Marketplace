@@ -60,9 +60,9 @@ This tool solves the challenge of mapping product data from a seller's format to
 └─────────────┘           └─────────────┘          └──────────────┘
      │                           │
      │                           │
-     ├─ Upload UI               ├─ File Parser
-     ├─ Mapping UI              ├─ Validation
-     └─ List View               └─ API Endpoints
+     ├─ Upload UI               ├─ Validation
+     ├─ Mapping UI              ├─ API Endpoints
+     └─ List View               └─ Structured
 ```
 
 ### Design Patterns
@@ -154,108 +154,7 @@ CREATE TABLE public."Mappings" (
 }
 ```
 
-## 🚀 Installation & Setup
 
-### Prerequisites
-
-- Node.js (v14 or higher)
-- npm or yarn
-- Git
-
-### Clone Repository
-
-```bash
-git clone https://github.com/Riddhi12349/Marketplace.git
-cd Marketplace
-```
-
-### Backend Setup
-
-```bash
-cd backend
-npm install
-
-# Install dependencies
-npm install express pg cors
-
-# Configure PostgreSQL database
-# Make sure PostgreSQL is installed and running
-
-# Create database
-psql -U postgres
-CREATE DATABASE marketplaceDB;
-\q
-
-# Update database credentials in db.js if needed
-# Default configuration:
-# - host: localhost
-# - user: postgres
-# - password: postgres123
-# - database: marketplaceDB
-# - port: 5432
-
-# Create tables
-
-CREATE TABLE public."Templates" (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL UNIQUE,
-  attributes JSONB NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE public."Mappings" (
-  id SERIAL PRIMARY KEY,
-  file_name VARCHAR(255) NOT NULL,
-  template_name VARCHAR(100) NOT NULL,
-  mapping_count INTEGER NOT NULL,
-  product_count INTEGER NOT NULL,
-  mappings JSONB NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-\q
-
-# Start server
-node server.js
-```
-
-The backend will run on `http://localhost:8000`
-
-### Frontend Setup
-
-```bash
-cd frontend
-npm install
-
-# Create .env file
-echo "REACT_APP_API_URL=http://localhost:8000" > .env
-
-# Start development server
-npm start
-```
-
-The frontend will run on `http://localhost:3000`
-
-### Environment Variables
-
-#### Backend (db.js)
-```javascript
-// Database configuration in db.js
-const pool = new Pool({
-  host: "localhost",
-  user: "postgres",
-  password: "postgres123",
-  database: "marketplaceDB",
-  port: 5432,
-});
-```
-
-**Note:** Update these values in `backend/db.js` according to your PostgreSQL setup.
-
-#### Frontend (.env)
-```env
-REACT_APP_API_URL=http://localhost:8000
-```
 
 ## 📖 Usage Guide
 
@@ -571,70 +470,7 @@ frontend/
       - Mapping.test.js
 ```
 
-## 🐳 Docker Deployment
-
-### Build and Run with Docker Compose
-
-```bash
-# Build images
-docker-compose build
-
-# Start all services
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
-```
-
-### Docker Compose Configuration
-
-```yaml
-version: '3.8'
-
-services:
-  backend:
-    build: ./backend
-    ports:
-      - "5000:5000"
-    environment:
-      - DATABASE_URL=postgres://user:pass@db:5432/marketplace
-    depends_on:
-      - db
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
-
-  db:
-    image: postgres:14
-    environment:
-      - POSTGRES_DB=marketplace
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-    volumes:
-      - db_data:/var/lib/postgresql/data
-
-volumes:
-  db_data:
-```
-
-### Individual Docker Commands
-
-```bash
-# Backend
-docker build -t marketplace-backend ./backend
-docker run -p 5000:5000 marketplace-backend
-
-# Frontend
-docker build -t marketplace-frontend ./frontend
-docker run -p 3000:80 marketplace-frontend
-```
+## 🐳 Docker Deploymen
 
 ## 📁 Project Structure
 
