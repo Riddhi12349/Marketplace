@@ -2,13 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Package, Upload, FileText, Layers } from 'lucide-react';
 import Header from '../components/Header';
+import { useStats } from "../context/StatsContext";
 
 const Dashboard = () => {
-  const stats = [
-    { name: 'Templates', value: '3', icon: FileText, href: '/templates' },
-    { name: 'Uploaded Files', value: '12', icon: Upload, href: '/upload' },
-    { name: 'Active Mappings', value: '8', icon: Layers, href: '/mappings' },
-    { name: 'Products Mapped', value: '1,247', icon: Package, href: '/mappings' },
+
+  const { stats } = useStats();
+  
+  const Dstats = [
+    { name: 'Templates', value: stats.templates, icon: FileText, href: '/templates' },
+    { name: 'Uploaded Files', value: stats.uploaded_files, icon: Upload, href: '/upload' },
+    { name: 'Active Mappings', value: stats.active_mappings, icon: Layers, href: '/mappings' },
+    { name: 'Products Mapped', value: stats.products_mapped, icon: Package, href: '/mappings' },
   ];
 
   const quickActions = [
@@ -48,7 +52,7 @@ const Dashboard = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat) => (
+          {Dstats.map((stat) => (
             <Link
               key={stat.name}
               to={stat.href}

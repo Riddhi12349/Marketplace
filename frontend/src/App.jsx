@@ -11,9 +11,12 @@ import SellersUpload from './pages/SellersUpload';
 import Mappings from './pages/Mappings';
 import TemplateDetails from './pages/TemplateDetails';
 
+import { StatsProvider } from "./context/StatsContext";
+
 const App = () => {
   return (
     <Theme appearance="inherit" radius="large" scaling="100%">
+      <StatsProvider>
       <Router>
         <main className="min-h-screen font-inter">
           <Routes>
@@ -32,6 +35,7 @@ const App = () => {
           />
         </main>
       </Router>
+      </StatsProvider>
     </Theme>
   );
 }

@@ -6,7 +6,7 @@ import MappingInterface from '../components/MappingInterface';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import parseFile from "../components/ParseFile";
-
+import { useStats } from "../context/StatsContext";
 
 const SellersUpload = () => {
 
@@ -25,7 +25,8 @@ const SellersUpload = () => {
 
   const [templates, setTemplates] = useState([]);
 
-
+  const { setStats } = useStats();
+   
    useEffect(() => {
       fetchTemplates();
     }, []);
@@ -48,6 +49,10 @@ const SellersUpload = () => {
 
       setFileColumns(columns);
       setFileRowCount(rowCount);
+       setStats((prv) => ({
+         ...prv,
+        uploaded_files : prv.uploaded_files + 1,
+      }));
 };
 
   const handleTemplateSelect = (template) => {
@@ -93,7 +98,7 @@ const SellersUpload = () => {
   };
 
   const saveMappings = async () => {
-  
+     
     try {
       const res = await axios.post(`${BACKEND_URL}/api/mappings/send`, 
       {
@@ -105,7 +110,15 @@ const SellersUpload = () => {
     }
     );
 
-      console.log(res.data);
+      // console.log(res.data);
+
+      setStats((prv) => ({
+         ...prv,
+          active_mappings : Object.keys(mappings).length ,
+        products_mapped : prv.products_mapped + Object.keys(mappings).length
+      }));
+
+
 
     } catch (err) {
       

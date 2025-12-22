@@ -1,19 +1,23 @@
 // FOR MARKETPLACE
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, FileText, Edit, Trash2 } from "lucide-react";
+import { Plus, FileText, Trash2 } from "lucide-react";
 import Header from "../components/Header";
 import FileUpload from "../components/FileUpload";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useStats } from "../context/StatsContext";
 
 const Templates = () => {
+
   const BACKEND_URL = "http://localhost:8000";
   const navigate = useNavigate();
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
   const [templates, setTemplates] = useState([]);
+
+  const { setStats } = useStats();
 
   useEffect(() => {
     fetchTemplates();
@@ -24,6 +28,11 @@ const Templates = () => {
       const res = await axios.get(`${BACKEND_URL}/api/template/list/all`);
     
       setTemplates(res.data.data || []);
+
+      setStats((prv) => ({
+         ...prv,
+         templates : res.data.data.length
+      }));
 
     } catch (err) {
       console.error(err);
