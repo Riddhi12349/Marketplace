@@ -88,17 +88,7 @@ const Header = () => {
             </nav>
           </div>
         )}
-{/* 
-          <button
-          onClick={() => setDarkMode(!darkMode)}
-          className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
-        >
-          {darkMode ? (
-            <Sun className="text-yellow-400" />
-          ) : (
-            <Moon className="text-gray-700" />
-          )}
-        </button> */}
+
 
       </div>
     </header>

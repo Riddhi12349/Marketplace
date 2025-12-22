@@ -28,8 +28,7 @@ const MappingInterface = ({
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <h3 className="text-lg font-medium text-gray-900 mb-6">Attribute Mapping</h3>
-      
-      {/* Visual mapping display - 3 column layout */}
+ 
       <div className="grid grid-cols-3 lg:grid-cols-3 gap-0 mb-8">
         
         {/* Left: Source columns from seller file */}

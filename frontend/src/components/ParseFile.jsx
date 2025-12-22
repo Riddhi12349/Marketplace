@@ -8,7 +8,7 @@ const parseFile = ({ file, mode }) => {
       return;
     }
 
-    // ================= CSV =================
+//  CSV
     if (file.name.endsWith(".csv")) {
       Papa.parse(file, {
         header: true,
@@ -32,8 +32,7 @@ const parseFile = ({ file, mode }) => {
         error: (err) => reject(err)
       });
     }
-
-    // ================= EXCEL =================
+//  EXCEL 
     else if (file.name.endsWith(".xlsx") || file.name.endsWith(".xls")) {
       const reader = new FileReader();
 
