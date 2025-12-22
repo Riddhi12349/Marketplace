@@ -3,7 +3,7 @@ import { Trash2, Calendar, FileText } from 'lucide-react';
 import Header from '../components/Header';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-
+import { useStats } from "../context/StatsContext";
 
 const Mappings = () => {
 
@@ -12,9 +12,34 @@ const Mappings = () => {
   const [selectedMapping, setSelectedMapping] = useState(null);
   const [mappings , setMappings] = useState([]);
 
+  const { setStats } = useStats();
+
   useEffect(()=>{
          getMappings();
   },[]);
+
+ useEffect(() => {
+
+  const totalMappings = mappings.reduce(
+  (sum, item) => sum + Number(item.mapping_count || 0),
+  0
+);
+
+const totalProducts = mappings.reduce(
+  (sum, item) => sum + Number(item.product_count || 0),
+  0
+);
+
+  setStats(prev => {
+    return {
+      ...prev,
+      uploaded_files: mappings.length,
+      active_mappings: totalMappings,
+      products_mapped: totalProducts
+    };
+  });
+}, [mappings]);
+
 
   const getMappings = async ()=>{
 
