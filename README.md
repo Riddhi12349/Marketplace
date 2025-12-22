@@ -157,39 +157,34 @@ CREATE TABLE public."Mappings" (
 Prerequisites
 
 Node.js (v14 or higher)
+
 npm or yarn
+
 Git
 
-Clone Repository
+PostgreSQL (installed & running)
 
+Clone Repository
 git clone https://github.com/Riddhi12349/Marketplace.git
 cd Marketplace
 
 Backend Setup
-
 cd backend
 npm install
 
-# Install dependencies
+Install Dependencies
 npm install express pg cors
 
-# Configure PostgreSQL database
-# Make sure PostgreSQL is installed and running
+Configure PostgreSQL Database
 
-# Create database
+Make sure PostgreSQL is installed and running.
+
+Create Database
 psql -U postgres
 CREATE DATABASE marketplaceDB;
 \q
 
-# Update database credentials in db.js if needed
-# Default configuration:
-# - host: localhost
-# - user: postgres
-# - password: postgres123
-# - database: marketplaceDB
-# - port: 5432
-
-# Create tables (run these SQL commands in PostgreSQL)
+Create Tables
 psql -U postgres -d marketplaceDB
 
 CREATE TABLE public."Templates" (
@@ -211,26 +206,7 @@ CREATE TABLE public."Mappings" (
 
 \q
 
-# Start server
-node server.js
-
-The backend will run on http://localhost:8000
-Frontend Setup
-
-cd frontend
-npm install
-
-# Create .env file
-echo "REACT_APP_API_URL=http://localhost:8000" > .env
-
-# Start development server
-npm start
-
-The frontend will run on http://localhost:3000
-Environment Variables
-Backend (db.js)
-
-// Database configuration in db.js
+Database Configuration (backend/db.js)
 const pool = new Pool({
   host: "localhost",
   user: "postgres",
@@ -239,9 +215,25 @@ const pool = new Pool({
   port: 5432,
 });
 
-Note: Update these values in backend/db.js according to your PostgreSQL setup.
+
+⚠️ Update credentials in backend/db.js if your PostgreSQL setup differs.
+
+Start Backend Server
+npm run dev
 
 
+📍 Backend runs at: http://localhost:8000
+
+Frontend Setup
+cd frontend
+npm install
+
+
+Start Frontend Server
+npm start
+
+
+📍 Frontend runs at: http://localhost:3000
 
 ## 📖 Usage Guide
 
