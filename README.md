@@ -19,13 +19,7 @@ A full-stack application that enables sellers to map their product catalog to di
 
 ## 🎯 Overview
 
-This tool solves the challenge of mapping product data from a seller's format to various marketplace-specific templates. Each marketplace (Myntra, Flipkart, etc.) has different attribute requirements and naming conventions. This application provides an intuitive UI to create these mappings and save them for future use.
-
-### Key Concepts
-
-- **Marketplace Template**: Defines the required attributes for a specific marketplace (e.g., productName, brand, price)
-- **Seller File**: CSV/Excel file containing the seller's product catalog with their own column naming
-- **Attribute Mapping**: The relationship between seller file columns and marketplace attributes
+This tool solves the challenge of mapping product data from a seller's format to various marketplace-specific templates. 
 
 ## ✨ Features
 
@@ -43,7 +37,7 @@ This tool solves the challenge of mapping product data from a seller's format to
 
 ### Frontend
 - **React.js** - UI framework
-- **CSS3** - Styling
+- **TailwindCSS** - Styling
 - **Axios** - HTTP client
 - **React Router** - Navigation
 
@@ -200,8 +194,7 @@ CREATE DATABASE marketplaceDB;
 # - database: marketplaceDB
 # - port: 5432
 
-# Create tables (run these SQL commands in PostgreSQL)
-psql -U postgres -d marketplaceDB
+# Create tables
 
 CREATE TABLE public."Templates" (
   id SERIAL PRIMARY KEY,
@@ -869,113 +862,3 @@ After uploading the seller CSV, create a mapping with:
 }
 ```
 
-## 🔧 Troubleshooting
-
-### Common Issues
-
-**1. Port already in use**
-```bash
-# Find process using port 8000
-lsof -ti:8000
-
-# Kill process
-kill -9 <PID>
-
-# Or use a different port in server.js
-```
-
-**2. PostgreSQL connection error**
-```
-Error: connect ECONNREFUSED 127.0.0.1:5432
-```
-**Solutions:**
-- Ensure PostgreSQL is installed and running
-  ```bash
-  # macOS
-  brew services start postgresql
-  
-  # Linux
-  sudo systemctl start postgresql
-  
-  # Windows
-  # Start PostgreSQL service from Services app
-  ```
-- Verify credentials in `backend/db.js`
-- Check if database exists:
-  ```bash
-  psql -U postgres -l
-  ```
-- Create database if missing:
-  ```bash
-  psql -U postgres -c "CREATE DATABASE marketplaceDB;"
-  ```
-
-**3. Tables don't exist**
-```
-Error: relation "public.Templates" does not exist
-```
-**Solution:** Create the tables using the SQL commands in the setup section
-
-**4. CORS errors**
-```
-Access to fetch has been blocked by CORS policy
-```
-**Solutions:**
-- Ensure backend is running on port 8000
-- Check `REACT_APP_API_URL` in frontend `.env`
-- Verify CORS is enabled in `server.js`
-
-**5. JSON parsing errors**
-```
-Error: Unexpected token in JSON
-```
-**Solution:** Ensure `express.json()` middleware is used in `server.js`
-
-**6. Module not found**
-```bash
-# Install missing dependencies
-cd backend
-npm install express pg cors
-
-cd frontend
-npm install
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Coding Standards
-
-- Follow ESLint configuration
-- Write unit tests for new features
-- Update documentation as needed
-- Use meaningful commit messages
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👥 Authors
-
-- **Riddhi** - *Initial work* - [Riddhi12349](https://github.com/Riddhi12349)
-
-## 🙏 Acknowledgments
-
-- Assignment provided as a take-home exercise for Full Stack development
-- Inspired by real-world marketplace integration challenges
-- Built with modern web development best practices
-
-## 📧 Contact
-
-For questions or feedback, please open an issue on GitHub or contact the repository owner.
-
----
-
-**Built with ❤️ for seamless marketplace integrations**
