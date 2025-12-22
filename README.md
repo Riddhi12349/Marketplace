@@ -37,7 +37,7 @@ This tool solves the challenge of mapping product data from a seller's format to
 
 ### Frontend
 - **React.js** - UI framework
-- **TailwindCSS** - Styling
+- **CSS3** - Styling
 - **Axios** - HTTP client
 - **React Router** - Navigation
 
@@ -60,9 +60,9 @@ This tool solves the challenge of mapping product data from a seller's format to
 └─────────────┘           └─────────────┘          └──────────────┘
      │                           │
      │                           │
-     ├─ Upload UI               ├─ Validation
-     ├─ Mapping UI              ├─ API Endpoints
-     └─ List View               └─ Structured
+     ├─ Upload UI               ├─ Structured
+     ├─ Mapping UI              ├─ Validation
+     └─ List View               └─ API Endpoints
 ```
 
 ### Design Patterns
@@ -153,38 +153,48 @@ CREATE TABLE public."Mappings" (
   "Category": "category"
 }
 ```
-🚀 Installation & Setup
-Prerequisites
 
-Node.js (v14 or higher)
+## 🚀 Installation & Setup
 
-npm or yarn
+### Prerequisites
 
-Git
+- Node.js (v14 or higher)
+- npm or yarn
+- Git
 
-PostgreSQL (installed & running)
+### Clone Repository
 
-Clone Repository
+```bash
 git clone https://github.com/Riddhi12349/Marketplace.git
 cd Marketplace
+```
 
-Backend Setup
+### Backend Setup
+
+```bash
 cd backend
 npm install
 
-Install Dependencies
+# Install dependencies
 npm install express pg cors
 
-Configure PostgreSQL Database
+# Configure PostgreSQL database
+# Make sure PostgreSQL is installed and running
 
-Make sure PostgreSQL is installed and running.
-
-Create Database
+# Create database
 psql -U postgres
 CREATE DATABASE marketplaceDB;
 \q
 
-Create Tables
+# Update database credentials in db.js if needed
+# Default configuration:
+# - host: localhost
+# - user: postgres
+# - password: postgres123
+# - database: marketplaceDB
+# - port: 5432
+
+# Create tables (run these SQL commands in PostgreSQL)
 psql -U postgres -d marketplaceDB
 
 CREATE TABLE public."Templates" (
@@ -206,7 +216,32 @@ CREATE TABLE public."Mappings" (
 
 \q
 
-Database Configuration (backend/db.js)
+# Start server
+node server.js
+```
+
+The backend will run on `http://localhost:8000`
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+
+# Create .env file
+echo "REACT_APP_API_URL=http://localhost:8000" > .env
+
+# Start development server
+npm start
+```
+
+The frontend will run on `http://localhost:3000`
+
+### Environment Variables
+
+#### Backend (db.js)
+```javascript
+// Database configuration in db.js
 const pool = new Pool({
   host: "localhost",
   user: "postgres",
@@ -214,26 +249,14 @@ const pool = new Pool({
   database: "marketplaceDB",
   port: 5432,
 });
+```
 
+**Note:** Update these values in `backend/db.js` according to your PostgreSQL setup.
 
-⚠️ Update credentials in backend/db.js if your PostgreSQL setup differs.
-
-Start Backend Server
-npm run dev
-
-
-📍 Backend runs at: http://localhost:8000
-
-Frontend Setup
-cd frontend
-npm install
-
-
-Start Frontend Server
-npm start
-
-
-📍 Frontend runs at: http://localhost:3000
+#### Frontend (.env)
+```env
+REACT_APP_API_URL=http://localhost:8000
+```
 
 ## 📖 Usage Guide
 
@@ -549,7 +572,70 @@ frontend/
       - Mapping.test.js
 ```
 
-## 🐳 Docker Deploymen
+## 🐳 Docker Deployment
+
+### Build and Run with Docker Compose
+
+```bash
+# Build images
+docker-compose build
+
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+### Docker Compose Configuration
+
+```yaml
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/marketplace
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=marketplace
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+```
+
+### Individual Docker Commands
+
+```bash
+# Backend
+docker build -t marketplace-backend ./backend
+docker run -p 5000:5000 marketplace-backend
+
+# Frontend
+docker build -t marketplace-frontend ./frontend
+docker run -p 3000:80 marketplace-frontend
+```
 
 ## 📁 Project Structure
 
@@ -775,5 +861,7 @@ After uploading the seller CSV, create a mapping with:
     "Description": "description"
   }
 }
+```
+
 ```
 
