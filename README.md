@@ -574,69 +574,6 @@ frontend/
 
 ## 🐳 Docker Deployment
 
-### Build and Run with Docker Compose
-
-```bash
-# Build images
-docker-compose build
-
-# Start all services
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
-```
-
-### Docker Compose Configuration
-
-```yaml
-version: '3.8'
-
-services:
-  backend:
-    build: ./backend
-    ports:
-      - "5000:5000"
-    environment:
-      - DATABASE_URL=postgres://user:pass@db:5432/marketplace
-    depends_on:
-      - db
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
-
-  db:
-    image: postgres:14
-    environment:
-      - POSTGRES_DB=marketplace
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-    volumes:
-      - db_data:/var/lib/postgresql/data
-
-volumes:
-  db_data:
-```
-
-### Individual Docker Commands
-
-```bash
-# Backend
-docker build -t marketplace-backend ./backend
-docker run -p 5000:5000 marketplace-backend
-
-# Frontend
-docker build -t marketplace-frontend ./frontend
-docker run -p 3000:80 marketplace-frontend
-```
-
 ## 📁 Project Structure
 
 ```
