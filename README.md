@@ -574,6 +574,8 @@ frontend/
 
 ## 🐳 Docker Deployment
 
+<img width="1593" height="859" alt="image" src="https://github.com/user-attachments/assets/65892c21-46f3-4912-9ccf-082bb0c6d307" />
+
 ## 📁 Project Structure
 
 ```
