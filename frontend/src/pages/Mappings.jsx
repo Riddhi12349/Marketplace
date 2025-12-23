@@ -7,8 +7,8 @@ import { useStats } from "../context/StatsContext";
 
 const Mappings = () => {
 
-  const BACKEND_URL="http://localhost:8000";
-  
+  const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
+
   const [selectedMapping, setSelectedMapping] = useState(null);
   const [mappings , setMappings] = useState([]);
 

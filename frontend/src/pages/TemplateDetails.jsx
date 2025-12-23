@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const TemplateDetails = () => {
    
-    const BACKEND_URL="http://localhost:8000";
+    const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
     const  {id } = useParams();
     const [template , setTemplate ] = useState(null);
     const [loading , setLoading] = useState(true);

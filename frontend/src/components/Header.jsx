@@ -8,8 +8,6 @@ const Header = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const { darkMode, setDarkMode } = useTheme();
-
   const navigation = [
     { name: 'Dashboard', href: '/' },
     { name: 'Templates', href: '/templates' },
@@ -17,7 +15,6 @@ const Header = () => {
     { name: 'Mappings', href: '/mappings' },
   ];
 
-  // Check if current page matches the link
   const isActive = (href) => location.pathname === href;
 
   const toggleMobileMenu = () => {

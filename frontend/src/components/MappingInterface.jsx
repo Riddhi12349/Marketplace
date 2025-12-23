@@ -8,7 +8,6 @@ const MappingInterface = ({
   onMappingChange,
 }) => {
   
-  // Helper functions
   const getMappedTarget = (sourceColumn) => {
     return mappings[sourceColumn] || '';
   };

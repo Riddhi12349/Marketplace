@@ -20,10 +20,9 @@ const FileUpload = ({
   const validExtensions = ['.csv', '.xlsx', '.xls'];
   const [error, setError] = useState('');
  
-  // const [templateRows , setTemplateRows] = useState([]);
   const [template , setTemplate] = useState({});
 
-  const BACKEND_URL="http://localhost:8000";
+  const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
 
   const handleDrop = (e) => {
     e.preventDefault();

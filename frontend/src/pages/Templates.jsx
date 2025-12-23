@@ -10,7 +10,7 @@ import { useStats } from "../context/StatsContext";
 
 const Templates = () => {
 
-  const BACKEND_URL = "http://localhost:8000";
+  const BACKEND_URL=process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
 
   const [selectedFile, setSelectedFile] = useState(null);
