@@ -2,9 +2,6 @@
 
 A full-stack application that enables sellers to map their product catalog to different marketplace templates (like Myntra, Flipkart, Amazon) for seamless product listing across multiple platforms.
 
-## 🐳 Docker Deployment
-
-<img width="1593" height="859" alt="image" src="https://github.com/user-attachments/assets/65892c21-46f3-4912-9ccf-082bb0c6d307" />
 
 ## 📋 Table of Contents
 
@@ -16,8 +13,6 @@ A full-stack application that enables sellers to map their product catalog to di
 - [Installation & Setup](#installation--setup)
 - [Usage Guide](#usage-guide)
 - [API Documentation](#api-documentation)
-- [Running Tests](#running-tests)
-- [Docker Deployment](#docker-deployment)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
 
