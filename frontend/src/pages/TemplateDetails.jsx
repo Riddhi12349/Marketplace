@@ -59,7 +59,7 @@ const TemplateDetails = () => {
                 <tbody>
                      {template.attributes.map((attr) => (
                 <tr key={attr.name} className="border-t">
-                  <td className="px-4 py-3 font-medium">{attr.name}</td>
+                  <td className="px-4 py-3 font-medium">{attr.Attributes}</td>
                   <td className="px-4 py-3">{attr.type}</td>
                   <td className="px-4 py-3">
                     {attr.required ? "Yes" : "No"}
